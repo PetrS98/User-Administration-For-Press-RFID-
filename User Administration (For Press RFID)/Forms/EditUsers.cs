@@ -24,7 +24,7 @@ namespace User_Administration__For_Press_RFID_.Forms
 
             Translator.LanguageChanged += Translate;
 
-            EnablePassword(false);
+            EnableNewRfidID(false);
         }
 
         private void Translate(object sender, Language e)
@@ -39,10 +39,11 @@ namespace User_Administration__For_Press_RFID_.Forms
                 lblTextPersonalID.Text =        "Osobní Číslo";
                 lblTextFirstName.Text =         "Jméno";
                 lblTextLastName.Text =          "Příjmení";
-                rdbNewPassword.Text =           "Nové Heslo";
-                rdbOldPassword.Text =           "Staré Heslo";
-                lblTextPassword.Text =          "Heslo";
-                lblTextConfirmPassword.Text =   "Potvrzení Hesla";
+                rdbNewRFIDID.Text =             "Nové RFID ID";
+                rdbOldRFIDID.Text =             "Staré RFID ID";
+                lblTextRFIDID.Text =            "Číslo karty";
+                lblTextActualUserGroup.Text =   "Aktuální uživatelská skupina:";
+                lblTextPermissionGroupList.Text = "Seznam Skupin Oprávnění";
                 btnClearParameters.Text =       "Vyčistit Parametry";
                 btnSaveUser.Text =              "Přidat do Databáze";
 
@@ -56,8 +57,7 @@ namespace User_Administration__For_Press_RFID_.Forms
                 Errors[1] = "Jméno může obsahovat pouze písmena. např. Jan, Jana";
                 Errors[2] = "Příjmení může obsahovat pouze písmena. např. Novák, Nováková";
                 Errors[3] = "Heslo musí být zadané!!!";
-                Errors[4] = "Heslo se musí shodovat s ověřovacím heslem!!!";
-                Errors[5] = "Oprávnění uživatele musí být vyplněné!!!";
+                Errors[4] = "Oprávnění uživatele musí být vyplněné!!!";
                 Errors[6] = "Osobní číslo nemá správný formát.";
 
             }
@@ -71,10 +71,11 @@ namespace User_Administration__For_Press_RFID_.Forms
                 lblTextPersonalID.Text =        "Personal ID";
                 lblTextFirstName.Text =         "First Name";
                 lblTextLastName.Text =          "Last Name";
-                rdbNewPassword.Text =           "New Password";
-                rdbOldPassword.Text =           "Old Password";
-                lblTextPassword.Text =          "Password";
-                lblTextConfirmPassword.Text =   "Confirm Password";
+                rdbNewRFIDID.Text =             "New RFID ID";
+                rdbOldRFIDID.Text =             "Old RFID ID";
+                lblTextRFIDID.Text =          "RFID Card ID";
+                lblTextActualUserGroup.Text = "Actual User Group:";
+                lblTextPermissionGroupList.Text = "Permission Group List";
                 btnClearParameters.Text =       "Clear Parameters";
                 btnSaveUser.Text =              "Add to Database";
 
@@ -87,16 +88,16 @@ namespace User_Administration__For_Press_RFID_.Forms
                 Errors[0] = "Personal number must be number!!!";
                 Errors[1] = "First name must contain only letters. e.g. John, Jane";
                 Errors[2] = "Last name must contain only letters. e.g. Doe";
-                Errors[3] = "Password must not be empty!!!";
-                Errors[4] = "Password and confirm password must be same!!!";
-                Errors[5] = "User permission must not be empty!!!";
+                Errors[3] = "New Card RFID must be in corect HEX format. e.g 1A2E3D7";
+                Errors[4] = "User permission must not be empty!!!";
                 Errors[6] = "Personal ID is in a wrong format.";
             }
         }
 
         private void EditUsers_VisibleChanged(object sender, EventArgs e)
         {
-            LoadUsersAndPermissions();
+            LoadUsers();
+            ClearParam();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -113,16 +114,17 @@ namespace User_Administration__For_Press_RFID_.Forms
 
         private void btnClearParameters_Click(object sender, EventArgs e)
         {
-            LoadUsersAndPermissions();
+            LoadUsers();
             ClearParam();
-            perPick.Reset();
         }
 
         private void lbUsersList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (lbUsersList.SelectedItem == null || lbUsersList.SelectedItem.ToString() == "") return;
 
-            EnablePassword(false);
+            ClearParam();
+            EnableNewRfidID(false);
+
 
             string[] IDAndName = lbUsersList.SelectedItem.ToString().Split(" | ");
 
@@ -137,16 +139,19 @@ namespace User_Administration__For_Press_RFID_.Forms
             tbPersonalID.Text = UserInformations.NameAndID.ID.ToString();
             tbFirstName.Text = UserInformations.NameAndID.FirstName;
             tbLastName.Text = UserInformations.NameAndID.LastName;
+            lblActualUserGroup.Text = UserInformations.PermissionGroup;
 
-            perPick.LoadPermissions(UserInformations.Permission);
+            LoadPermissions();
+
+            lbPermissionGroupList.Items.Remove(UserInformations.PermissionGroup);
 
             OldUserInformations = UserInformations;
         }
 
         private void rbdPasswordSel_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdbNewPassword.Checked == false && rdbOldPassword.Checked) EnablePassword(false);
-            else EnablePassword(true);
+            if (rdbNewRFIDID.Checked == false && rdbOldRFIDID.Checked) EnableNewRfidID(false);
+            else EnableNewRfidID(true);
         }
 
         private void btnSaveUser_Click(object sender, EventArgs e)
@@ -156,31 +161,30 @@ namespace User_Administration__For_Press_RFID_.Forms
             UserNameAndID userNameAndID = new UserNameAndID(int.Parse(tbPersonalID.Text), tbFirstName.Text, tbLastName.Text);
             string password;
 
-            if (rdbNewPassword.Checked)
+            if (rdbNewRFIDID.Checked)
             {
-                password = PasswordHasher.HashPassword(tbPassword.Text);
+                password = PasswordHasher.HashPassword(tbRFIDID.Text);
             }
             else
             {
-                password = OldUserInformations.Password;
+                //password = OldUserInformations.Password;
             }
 
-            UserInformations = new UserInformations(userNameAndID, password, perPick.GetPickedPermissions());
+            //UserInformations = new UserInformations(userNameAndID, password, perPick.GetPickedPermissions());
 
-            mySQLDatabase.UpdateUserInformations(UserInformations, OldUserInformations);
+            //mySQLDatabase.UpdateUserInformations(UserInformations, OldUserInformations);
 
-            LoadUsersAndPermissions();
+            LoadUsers();
             ClearParam();
-            perPick.Reset();
+            //perPick.Reset();
         }
 
-        private void LoadUsersAndPermissions()
+        private void LoadUsers()
         {
             if (Visible && mySQLDatabase.Status == ClientStatus.Connected)
             {
                 lbUsersList.Items.Clear();
-
-                perPick.InitializePermissions(mySQLDatabase.ReadPermissionList());
+                LoadPermissions();
 
                 foreach (var UserName in mySQLDatabase.ReadNamesAndIDs())
                 {
@@ -206,42 +210,32 @@ namespace User_Administration__For_Press_RFID_.Forms
                 CustomMessageBox.ShowPopup(InputErrorTitle, Errors[2]);
                 return false;
             }
-            if (rdbNewPassword.Checked)
+            if (rdbNewRFIDID.Checked)
             {
-                if (tbPassword.Text == null || tbPassword.Text == "")
+                if (TextBoxHelper.TbInputIsHex(tbRFIDID))
                 {
                     CustomMessageBox.ShowPopup(InputErrorTitle, Errors[3]);
                     return false;
                 }
-                if (tbPassword.Text != tbConfirmPassword.Text)
-                {
-                    CustomMessageBox.ShowPopup(InputErrorTitle, Errors[4]);
-                    return false;
-                }
             }
-            if (perPick.GetPickedPermissions().Count == 0)
+            if (lbUsersList.SelectedItems.ToString() == null || lbUsersList.SelectedItem.ToString() == "")
             {
-                CustomMessageBox.ShowPopup(InputErrorTitle, Errors[5]);
+                CustomMessageBox.ShowPopup(InputErrorTitle, Errors[4]);
                 return false;
             }
             return true;
         }
 
-        private void EnablePassword(bool Enable)
+        private void EnableNewRfidID(bool Enable)
         {
-            tbPassword.ReadOnly = !Enable;
-            tbConfirmPassword.ReadOnly = !Enable;
+            tbRFIDID.ReadOnly = !Enable;
 
             if (Enable)
             {
-                tbPassword.Cursor = Cursors.IBeam;
-                tbConfirmPassword.Cursor = Cursors.IBeam;
                 tlp1.Visible = true;
             }
             else
             {
-                tbPassword.Cursor = Cursors.No;
-                tbConfirmPassword.Cursor = Cursors.No;
                 tlp1.Visible = false;
             }
         }
@@ -251,11 +245,24 @@ namespace User_Administration__For_Press_RFID_.Forms
             tbPersonalID.Text = "";
             tbFirstName.Text = "";
             tbLastName.Text = "";
-            rdbOldPassword.Checked = true;
-            tbPassword.Text = "";
-            tbConfirmPassword.Text = "";
+            rdbOldRFIDID.Checked = true;
+            tbRFIDID.Text = "";
+            lblActualUserGroup.Text = "";
             UserInformations = null;
             OldUserInformations = null;
+        }
+
+        private void LoadPermissions()
+        {
+            if (Visible && mySQLDatabase.Status == ClientStatus.Connected)
+            {
+                lbPermissionGroupList.Items.Clear();
+
+                foreach (var PermissionGroup in mySQLDatabase.ReadPermissionGroupList())
+                {
+                    lbPermissionGroupList.Items.Add(PermissionGroup);
+                }
+            }
         }
     }
 }

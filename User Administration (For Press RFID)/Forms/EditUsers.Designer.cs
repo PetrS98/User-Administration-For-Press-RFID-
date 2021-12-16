@@ -42,26 +42,37 @@ namespace User_Administration__For_Press_RFID_.Forms
             this.tbPersonalID = new System.Windows.Forms.TextBox();
             this.tbFirstName = new System.Windows.Forms.TextBox();
             this.tbLastName = new System.Windows.Forms.TextBox();
-            this.rdbNewPassword = new System.Windows.Forms.RadioButton();
-            this.rdbOldPassword = new System.Windows.Forms.RadioButton();
-            this.perPick = new User_Administration__For_Press_RFID_.UserControls.PermissionPicker();
+            this.rdbNewRFIDID = new System.Windows.Forms.RadioButton();
+            this.rdbOldRFIDID = new System.Windows.Forms.RadioButton();
             this.p0 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblTextPassword = new System.Windows.Forms.Label();
-            this.tbPassword = new System.Windows.Forms.TextBox();
-            this.lblTextConfirmPassword = new System.Windows.Forms.Label();
-            this.tbConfirmPassword = new System.Windows.Forms.TextBox();
+            this.lblTextRFIDID = new System.Windows.Forms.Label();
+            this.tbRFIDID = new System.Windows.Forms.TextBox();
             this.p2 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.lbPermissionGroupList = new System.Windows.Forms.ListBox();
+            this.lblTextPermissionGroupList = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblActualUserGroup = new System.Windows.Forms.Label();
+            this.lblTextActualUserGroup = new System.Windows.Forms.Label();
             this.tlp0 = new System.Windows.Forms.TableLayoutPanel();
             this.tlp1 = new System.Windows.Forms.TableLayoutPanel();
             this.tlp2 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.rdbNewUserPermGroup = new System.Windows.Forms.RadioButton();
+            this.rdbOldUserPermGroup = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.p0.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.p2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.tlp0.SuspendLayout();
             this.tlp1.SuspendLayout();
             this.tlp2.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbUsersList
@@ -86,7 +97,7 @@ namespace User_Administration__For_Press_RFID_.Forms
             this.btnClearParameters.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClearParameters.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnClearParameters.ForeColor = System.Drawing.Color.White;
-            this.btnClearParameters.Location = new System.Drawing.Point(4, 217);
+            this.btnClearParameters.Location = new System.Drawing.Point(3, 240);
             this.btnClearParameters.Name = "btnClearParameters";
             this.btnClearParameters.Size = new System.Drawing.Size(185, 50);
             this.btnClearParameters.TabIndex = 35;
@@ -102,7 +113,7 @@ namespace User_Administration__For_Press_RFID_.Forms
             this.btnSaveUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSaveUser.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnSaveUser.ForeColor = System.Drawing.Color.White;
-            this.btnSaveUser.Location = new System.Drawing.Point(235, 217);
+            this.btnSaveUser.Location = new System.Drawing.Point(236, 240);
             this.btnSaveUser.Name = "btnSaveUser";
             this.btnSaveUser.Size = new System.Drawing.Size(185, 50);
             this.btnSaveUser.TabIndex = 34;
@@ -158,8 +169,8 @@ namespace User_Administration__For_Press_RFID_.Forms
             this.tableLayoutPanel1.Controls.Add(this.tbPersonalID, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tbFirstName, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.tbLastName, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.rdbNewPassword, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.rdbOldPassword, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.rdbNewRFIDID, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.rdbOldRFIDID, 0, 7);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(-1, 345);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 9;
@@ -245,42 +256,34 @@ namespace User_Administration__For_Press_RFID_.Forms
             this.tbLastName.Size = new System.Drawing.Size(411, 20);
             this.tbLastName.TabIndex = 8;
             // 
-            // rdbNewPassword
+            // rdbNewRFIDID
             // 
-            this.rdbNewPassword.AutoSize = true;
-            this.rdbNewPassword.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.rdbNewPassword.ForeColor = System.Drawing.Color.White;
-            this.rdbNewPassword.Location = new System.Drawing.Point(3, 192);
-            this.rdbNewPassword.Name = "rdbNewPassword";
-            this.rdbNewPassword.Size = new System.Drawing.Size(115, 21);
-            this.rdbNewPassword.TabIndex = 14;
-            this.rdbNewPassword.TabStop = true;
-            this.rdbNewPassword.Text = "New Password";
-            this.rdbNewPassword.UseVisualStyleBackColor = true;
-            this.rdbNewPassword.CheckedChanged += new System.EventHandler(this.rbdPasswordSel_CheckedChanged);
+            this.rdbNewRFIDID.AutoSize = true;
+            this.rdbNewRFIDID.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.rdbNewRFIDID.ForeColor = System.Drawing.Color.White;
+            this.rdbNewRFIDID.Location = new System.Drawing.Point(3, 192);
+            this.rdbNewRFIDID.Name = "rdbNewRFIDID";
+            this.rdbNewRFIDID.Size = new System.Drawing.Size(104, 21);
+            this.rdbNewRFIDID.TabIndex = 14;
+            this.rdbNewRFIDID.TabStop = true;
+            this.rdbNewRFIDID.Text = "New RFID ID";
+            this.rdbNewRFIDID.UseVisualStyleBackColor = true;
+            this.rdbNewRFIDID.CheckedChanged += new System.EventHandler(this.rbdPasswordSel_CheckedChanged);
             // 
-            // rdbOldPassword
+            // rdbOldRFIDID
             // 
-            this.rdbOldPassword.AutoSize = true;
-            this.rdbOldPassword.Checked = true;
-            this.rdbOldPassword.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.rdbOldPassword.ForeColor = System.Drawing.Color.White;
-            this.rdbOldPassword.Location = new System.Drawing.Point(3, 167);
-            this.rdbOldPassword.Name = "rdbOldPassword";
-            this.rdbOldPassword.Size = new System.Drawing.Size(110, 19);
-            this.rdbOldPassword.TabIndex = 13;
-            this.rdbOldPassword.TabStop = true;
-            this.rdbOldPassword.Text = "Old Password";
-            this.rdbOldPassword.UseVisualStyleBackColor = true;
-            this.rdbOldPassword.CheckedChanged += new System.EventHandler(this.rbdPasswordSel_CheckedChanged);
-            // 
-            // perPick
-            // 
-            this.perPick.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.perPick.Location = new System.Drawing.Point(0, 0);
-            this.perPick.Name = "perPick";
-            this.perPick.Size = new System.Drawing.Size(425, 215);
-            this.perPick.TabIndex = 48;
+            this.rdbOldRFIDID.AutoSize = true;
+            this.rdbOldRFIDID.Checked = true;
+            this.rdbOldRFIDID.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.rdbOldRFIDID.ForeColor = System.Drawing.Color.White;
+            this.rdbOldRFIDID.Location = new System.Drawing.Point(3, 167);
+            this.rdbOldRFIDID.Name = "rdbOldRFIDID";
+            this.rdbOldRFIDID.Size = new System.Drawing.Size(99, 19);
+            this.rdbOldRFIDID.TabIndex = 13;
+            this.rdbOldRFIDID.TabStop = true;
+            this.rdbOldRFIDID.Text = "Old RFID ID";
+            this.rdbOldRFIDID.UseVisualStyleBackColor = true;
+            this.rdbOldRFIDID.CheckedChanged += new System.EventHandler(this.rbdPasswordSel_CheckedChanged);
             // 
             // p0
             // 
@@ -290,7 +293,7 @@ namespace User_Administration__For_Press_RFID_.Forms
             this.p0.Controls.Add(this.tbSearchUser);
             this.p0.Controls.Add(this.tableLayoutPanel1);
             this.p0.Controls.Add(this.btnSearch);
-            this.p0.Location = new System.Drawing.Point(19, 3);
+            this.p0.Location = new System.Drawing.Point(13, 3);
             this.p0.Name = "p0";
             this.p0.Size = new System.Drawing.Size(416, 565);
             this.p0.TabIndex = 49;
@@ -300,78 +303,123 @@ namespace User_Administration__For_Press_RFID_.Forms
             this.tableLayoutPanel2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.lblTextPassword, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tbPassword, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.lblTextConfirmPassword, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.tbConfirmPassword, 0, 3);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(19, 3);
+            this.tableLayoutPanel2.Controls.Add(this.lblTextRFIDID, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tbRFIDID, 0, 1);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(13, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 4;
+            this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.632188F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.632189F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.632189F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.632189F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(416, 106);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(416, 46);
             this.tableLayoutPanel2.TabIndex = 48;
             // 
-            // lblTextPassword
+            // lblTextRFIDID
             // 
-            this.lblTextPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblTextPassword.AutoSize = true;
-            this.lblTextPassword.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTextPassword.ForeColor = System.Drawing.Color.White;
-            this.lblTextPassword.Location = new System.Drawing.Point(3, 6);
-            this.lblTextPassword.Name = "lblTextPassword";
-            this.lblTextPassword.Size = new System.Drawing.Size(76, 20);
-            this.lblTextPassword.TabIndex = 9;
-            this.lblTextPassword.Text = "Password";
+            this.lblTextRFIDID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTextRFIDID.AutoSize = true;
+            this.lblTextRFIDID.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTextRFIDID.ForeColor = System.Drawing.Color.White;
+            this.lblTextRFIDID.Location = new System.Drawing.Point(3, 2);
+            this.lblTextRFIDID.Name = "lblTextRFIDID";
+            this.lblTextRFIDID.Size = new System.Drawing.Size(99, 20);
+            this.lblTextRFIDID.TabIndex = 9;
+            this.lblTextRFIDID.Text = "Card RFID ID";
             // 
-            // tbPassword
+            // tbRFIDID
             // 
-            this.tbPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.tbPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbPassword.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tbPassword.ForeColor = System.Drawing.Color.White;
-            this.tbPassword.Location = new System.Drawing.Point(3, 29);
-            this.tbPassword.Name = "tbPassword";
-            this.tbPassword.PasswordChar = '*';
-            this.tbPassword.Size = new System.Drawing.Size(410, 20);
-            this.tbPassword.TabIndex = 11;
-            // 
-            // lblTextConfirmPassword
-            // 
-            this.lblTextConfirmPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblTextConfirmPassword.AutoSize = true;
-            this.lblTextConfirmPassword.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblTextConfirmPassword.ForeColor = System.Drawing.Color.White;
-            this.lblTextConfirmPassword.Location = new System.Drawing.Point(3, 58);
-            this.lblTextConfirmPassword.Name = "lblTextConfirmPassword";
-            this.lblTextConfirmPassword.Size = new System.Drawing.Size(137, 20);
-            this.lblTextConfirmPassword.TabIndex = 10;
-            this.lblTextConfirmPassword.Text = "Confirm Password";
-            // 
-            // tbConfirmPassword
-            // 
-            this.tbConfirmPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.tbConfirmPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbConfirmPassword.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tbConfirmPassword.ForeColor = System.Drawing.Color.White;
-            this.tbConfirmPassword.Location = new System.Drawing.Point(3, 81);
-            this.tbConfirmPassword.Name = "tbConfirmPassword";
-            this.tbConfirmPassword.PasswordChar = '*';
-            this.tbConfirmPassword.Size = new System.Drawing.Size(410, 20);
-            this.tbConfirmPassword.TabIndex = 12;
+            this.tbRFIDID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tbRFIDID.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbRFIDID.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tbRFIDID.ForeColor = System.Drawing.Color.White;
+            this.tbRFIDID.Location = new System.Drawing.Point(3, 25);
+            this.tbRFIDID.Name = "tbRFIDID";
+            this.tbRFIDID.Size = new System.Drawing.Size(410, 20);
+            this.tbRFIDID.TabIndex = 11;
             // 
             // p2
             // 
             this.p2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.p2.Controls.Add(this.perPick);
+            this.p2.Controls.Add(this.tableLayoutPanel3);
             this.p2.Controls.Add(this.btnSaveUser);
             this.p2.Controls.Add(this.btnClearParameters);
-            this.p2.Location = new System.Drawing.Point(15, 3);
+            this.p2.Location = new System.Drawing.Point(9, 3);
             this.p2.Name = "p2";
-            this.p2.Size = new System.Drawing.Size(424, 272);
+            this.p2.Size = new System.Drawing.Size(424, 293);
             this.p2.TabIndex = 51;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.lbPermissionGroupList, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.lblTextPermissionGroupList, 0, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.438819F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.56118F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(424, 234);
+            this.tableLayoutPanel3.TabIndex = 37;
+            // 
+            // lbPermissionGroupList
+            // 
+            this.lbPermissionGroupList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lbPermissionGroupList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbPermissionGroupList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbPermissionGroupList.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbPermissionGroupList.ForeColor = System.Drawing.Color.White;
+            this.lbPermissionGroupList.FormattingEnabled = true;
+            this.lbPermissionGroupList.ItemHeight = 20;
+            this.lbPermissionGroupList.Location = new System.Drawing.Point(3, 22);
+            this.lbPermissionGroupList.Name = "lbPermissionGroupList";
+            this.lbPermissionGroupList.Size = new System.Drawing.Size(418, 209);
+            this.lbPermissionGroupList.TabIndex = 23;
+            // 
+            // lblTextPermissionGroupList
+            // 
+            this.lblTextPermissionGroupList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTextPermissionGroupList.AutoSize = true;
+            this.lblTextPermissionGroupList.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTextPermissionGroupList.ForeColor = System.Drawing.Color.White;
+            this.lblTextPermissionGroupList.Location = new System.Drawing.Point(3, 0);
+            this.lblTextPermissionGroupList.Name = "lblTextPermissionGroupList";
+            this.lblTextPermissionGroupList.Size = new System.Drawing.Size(163, 19);
+            this.lblTextPermissionGroupList.TabIndex = 22;
+            this.lblTextPermissionGroupList.Text = "Permission Group List";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lblActualUserGroup);
+            this.panel1.Controls.Add(this.lblTextActualUserGroup);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 623);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(443, 25);
+            this.panel1.TabIndex = 36;
+            // 
+            // lblActualUserGroup
+            // 
+            this.lblActualUserGroup.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblActualUserGroup.AutoSize = true;
+            this.lblActualUserGroup.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblActualUserGroup.ForeColor = System.Drawing.Color.White;
+            this.lblActualUserGroup.Location = new System.Drawing.Point(234, 3);
+            this.lblActualUserGroup.Name = "lblActualUserGroup";
+            this.lblActualUserGroup.Size = new System.Drawing.Size(69, 20);
+            this.lblActualUserGroup.TabIndex = 8;
+            this.lblActualUserGroup.Text = "XXXXXX";
+            // 
+            // lblTextActualUserGroup
+            // 
+            this.lblTextActualUserGroup.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblTextActualUserGroup.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTextActualUserGroup.ForeColor = System.Drawing.Color.White;
+            this.lblTextActualUserGroup.Location = new System.Drawing.Point(12, 3);
+            this.lblTextActualUserGroup.Name = "lblTextActualUserGroup";
+            this.lblTextActualUserGroup.Size = new System.Drawing.Size(216, 20);
+            this.lblTextActualUserGroup.TabIndex = 7;
+            this.lblTextActualUserGroup.Text = "Actual User Group:";
+            this.lblTextActualUserGroup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tlp0
             // 
@@ -383,7 +431,7 @@ namespace User_Administration__For_Press_RFID_.Forms
             this.tlp0.Name = "tlp0";
             this.tlp0.RowCount = 1;
             this.tlp0.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp0.Size = new System.Drawing.Size(455, 571);
+            this.tlp0.Size = new System.Drawing.Size(443, 571);
             this.tlp0.TabIndex = 52;
             // 
             // tlp1
@@ -396,7 +444,7 @@ namespace User_Administration__For_Press_RFID_.Forms
             this.tlp1.Name = "tlp1";
             this.tlp1.RowCount = 1;
             this.tlp1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp1.Size = new System.Drawing.Size(455, 112);
+            this.tlp1.Size = new System.Drawing.Size(443, 52);
             this.tlp1.TabIndex = 53;
             // 
             // tlp2
@@ -405,20 +453,74 @@ namespace User_Administration__For_Press_RFID_.Forms
             this.tlp2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlp2.Controls.Add(this.p2, 0, 0);
             this.tlp2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tlp2.Location = new System.Drawing.Point(0, 683);
+            this.tlp2.Location = new System.Drawing.Point(0, 706);
             this.tlp2.Name = "tlp2";
             this.tlp2.RowCount = 1;
             this.tlp2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlp2.Size = new System.Drawing.Size(455, 278);
+            this.tlp2.Size = new System.Drawing.Size(443, 299);
             this.tlp2.TabIndex = 54;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.tableLayoutPanel4);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 648);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(443, 58);
+            this.panel2.TabIndex = 55;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tableLayoutPanel4.ColumnCount = 1;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.rdbNewUserPermGroup, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.rdbOldUserPermGroup, 0, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(13, 3);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(287, 55);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // rdbNewUserPermGroup
+            // 
+            this.rdbNewUserPermGroup.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.rdbNewUserPermGroup.AutoSize = true;
+            this.rdbNewUserPermGroup.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.rdbNewUserPermGroup.ForeColor = System.Drawing.Color.White;
+            this.rdbNewUserPermGroup.Location = new System.Drawing.Point(3, 30);
+            this.rdbNewUserPermGroup.Name = "rdbNewUserPermGroup";
+            this.rdbNewUserPermGroup.Size = new System.Drawing.Size(198, 21);
+            this.rdbNewUserPermGroup.TabIndex = 15;
+            this.rdbNewUserPermGroup.Text = "New Permission User Group";
+            this.rdbNewUserPermGroup.UseVisualStyleBackColor = true;
+            // 
+            // rdbOldUserPermGroup
+            // 
+            this.rdbOldUserPermGroup.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.rdbOldUserPermGroup.AutoSize = true;
+            this.rdbOldUserPermGroup.Checked = true;
+            this.rdbOldUserPermGroup.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.rdbOldUserPermGroup.ForeColor = System.Drawing.Color.White;
+            this.rdbOldUserPermGroup.Location = new System.Drawing.Point(3, 3);
+            this.rdbOldUserPermGroup.Name = "rdbOldUserPermGroup";
+            this.rdbOldUserPermGroup.Size = new System.Drawing.Size(193, 21);
+            this.rdbOldUserPermGroup.TabIndex = 14;
+            this.rdbOldUserPermGroup.TabStop = true;
+            this.rdbOldUserPermGroup.Text = "Old Permission User Group";
+            this.rdbOldUserPermGroup.UseVisualStyleBackColor = true;
             // 
             // EditUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
-            this.ClientSize = new System.Drawing.Size(455, 976);
+            this.ClientSize = new System.Drawing.Size(443, 1009);
             this.Controls.Add(this.tlp2);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.tlp1);
             this.Controls.Add(this.tlp0);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -434,9 +536,16 @@ namespace User_Administration__For_Press_RFID_.Forms
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.p2.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.tlp0.ResumeLayout(false);
             this.tlp1.ResumeLayout(false);
             this.tlp2.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -448,7 +557,6 @@ namespace User_Administration__For_Press_RFID_.Forms
         private System.Windows.Forms.Label lblTextUserList;
         private System.Windows.Forms.TextBox tbSearchUser;
         private System.Windows.Forms.Button btnSearch;
-        private UserControls.PermissionPicker perPick;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label lblTextPersonalID;
         private System.Windows.Forms.Label lblTextFirstName;
@@ -456,17 +564,25 @@ namespace User_Administration__For_Press_RFID_.Forms
         private System.Windows.Forms.TextBox tbPersonalID;
         private System.Windows.Forms.TextBox tbFirstName;
         private System.Windows.Forms.TextBox tbLastName;
-        private System.Windows.Forms.RadioButton rdbNewPassword;
-        private System.Windows.Forms.RadioButton rdbOldPassword;
+        private System.Windows.Forms.RadioButton rdbNewRFIDID;
+        private System.Windows.Forms.RadioButton rdbOldRFIDID;
         private System.Windows.Forms.Panel p0;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Label lblTextPassword;
-        private System.Windows.Forms.TextBox tbPassword;
-        private System.Windows.Forms.Label lblTextConfirmPassword;
-        private System.Windows.Forms.TextBox tbConfirmPassword;
+        private System.Windows.Forms.Label lblTextRFIDID;
+        private System.Windows.Forms.TextBox tbRFIDID;
         private System.Windows.Forms.Panel p2;
         private System.Windows.Forms.TableLayoutPanel tlp0;
         private System.Windows.Forms.TableLayoutPanel tlp1;
         private System.Windows.Forms.TableLayoutPanel tlp2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblActualUserGroup;
+        private System.Windows.Forms.Label lblTextActualUserGroup;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.ListBox lbPermissionGroupList;
+        private System.Windows.Forms.Label lblTextPermissionGroupList;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.RadioButton rdbNewUserPermGroup;
+        private System.Windows.Forms.RadioButton rdbOldUserPermGroup;
     }
 }

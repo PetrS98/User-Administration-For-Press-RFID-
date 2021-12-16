@@ -106,7 +106,7 @@ namespace User_Administration__For_Press_RFID_.Forms
                 return;
             }
 
-            if (mySQLDatabase.DeleteUserFromDB(int.Parse(IDAndName[0]))) LoadUsers();
+            //if (mySQLDatabase.DeleteUserFromDB(int.Parse(IDAndName[0]))) LoadUsers();
         }
 
         private void LoadUsers()

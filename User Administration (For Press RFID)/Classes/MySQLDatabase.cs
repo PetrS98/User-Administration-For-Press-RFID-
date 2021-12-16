@@ -38,7 +38,7 @@ namespace User_Administration__For_Press_RFID_.Classes
         {
             try
             {
-                mySqlConnection = new MySqlConnection("server=" + IpAddress + ";" + "uid=" + UserName + ";" + "pwd=" + Password + ";" + "database=db_visual_inspection");
+                mySqlConnection = new MySqlConnection("server=" + IpAddress + ";" + "uid=" + UserName + ";" + "pwd=" + Password + ";" + "database=db_press_rfid");
                 mySqlConnection.Open();
                 _timerStatus.Start();
                 return true;
@@ -58,14 +58,14 @@ namespace User_Administration__For_Press_RFID_.Classes
             mySqlConnection = null;
         }
 
-        public List<Permission> ReadPermissionList()
+        public List<string> ReadPermissionGroupList()
         {
-            List<Permission> UserPermission = new List<Permission>();
+            List<string> UserGroup = new List<string>();
 
             using MySqlCommand mySqlCommand = new MySqlCommand();
 
             mySqlCommand.Connection = mySqlConnection;
-            mySqlCommand.CommandText = @"SELECT permission_name, bit_position FROM permissions;";
+            mySqlCommand.CommandText = @"SELECT permission_group_name FROM user_groups;";
 
             try
             {
@@ -73,11 +73,9 @@ namespace User_Administration__For_Press_RFID_.Classes
 
                 while (mySqlDataReader.Read())
                 {
-                    Permission permission = new Permission(mySqlDataReader.GetString(0), mySqlDataReader.GetByte(1));
-
-                    UserPermission.Add(permission);
+                    UserGroup.Add(mySqlDataReader.GetString(0));
                 }
-                return UserPermission;
+                return UserGroup;
             }
             catch(Exception ex)
             {
@@ -114,8 +112,6 @@ namespace User_Administration__For_Press_RFID_.Classes
 
         public UserInformations ReadUserInformation(int PersonalID)
         {
-            List<Permission> permissions = new List<Permission>(ReadPermissionList());
-
             UserInformations UserInformation = new UserInformations(null, null, null);
 
             using MySqlCommand mySqlCommand = new MySqlCommand();
@@ -132,13 +128,12 @@ namespace User_Administration__For_Press_RFID_.Classes
                 while (mySqlDataReader.Read())
                 {
                     UserNameAndID NameAndID = new UserNameAndID(mySqlDataReader.GetInt32(1), mySqlDataReader.GetString(2), mySqlDataReader.GetString(3));
-                    string Password = mySqlDataReader.GetString(4);
-                    List<Permission> Permission = PermissionConverter.NumberToPermissions(mySqlDataReader.GetInt32(5), permissions);
-                    UserInformation = new UserInformations(NameAndID, Password, Permission);
+                    string RFIDID = mySqlDataReader.GetString(4);
+                    UserInformation = new UserInformations(NameAndID, RFIDID, mySqlDataReader.GetString(5));
                 }
                 return UserInformation;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CustomMessageBox.ShowPopup("MySQL Error", ex.Message);
                 return null;
@@ -150,14 +145,14 @@ namespace User_Administration__For_Press_RFID_.Classes
             using MySqlCommand mySqlCommand = new MySqlCommand();
 
             mySqlCommand.Connection = mySqlConnection;
-            mySqlCommand.CommandText = @"INSERT INTO users (personal_id, first_name, last_name, password, permissions) 
-                                                   VALUES (@PersonalID, @FirstName, @LastName, @Password, @Permission)";
+            mySqlCommand.CommandText = @"INSERT INTO users (personal_id, first_name, last_name, rfid_id, permission_group) 
+                                                   VALUES (@PersonalID, @FirstName, @LastName, @rfid_id, @permission_group)";
 
             mySqlCommand.Parameters.AddWithValue("@PersonalID", userInformations.NameAndID.ID);
             mySqlCommand.Parameters.AddWithValue("@FirstName", userInformations.NameAndID.FirstName);
             mySqlCommand.Parameters.AddWithValue("@LastName", userInformations.NameAndID.LastName);
-            mySqlCommand.Parameters.AddWithValue("@Password", userInformations.Password);
-            mySqlCommand.Parameters.AddWithValue("@Permission", PermissionConverter.PermissionsToNumber(userInformations.Permission));
+            mySqlCommand.Parameters.AddWithValue("@rfid_id", userInformations.RFIDID);
+            mySqlCommand.Parameters.AddWithValue("@permission_group", userInformations.PermissionGroup);
 
             try
             {
@@ -172,57 +167,57 @@ namespace User_Administration__For_Press_RFID_.Classes
             return true;
         }
 
-        public bool DeleteUserFromDB(int PersonalID)
-        {
-            using MySqlCommand mySqlCommand = new MySqlCommand();
+        //public bool DeleteUserFromDB(int PersonalID)
+        //{
+        //    using MySqlCommand mySqlCommand = new MySqlCommand();
 
-            mySqlCommand.Connection = mySqlConnection;
-            mySqlCommand.CommandText = @"DELETE FROM users WHERE personal_id = @PersonalID;";
+        //    mySqlCommand.Connection = mySqlConnection;
+        //    mySqlCommand.CommandText = @"DELETE FROM users WHERE personal_id = @PersonalID;";
 
-            mySqlCommand.Parameters.AddWithValue("@PersonalID", PersonalID);
+        //    mySqlCommand.Parameters.AddWithValue("@PersonalID", PersonalID);
 
-            try
-            {
-                using MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
-                return true;
-            }
-            catch(Exception ex)
-            {
-                CustomMessageBox.ShowPopup("MySQL Error", ex.Message);
-                return false;
-            }
-        }
+        //    try
+        //    {
+        //        using MySqlDataReader mySqlDataReader = mySqlCommand.ExecuteReader();
+        //        return true;
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        CustomMessageBox.ShowPopup("MySQL Error", ex.Message);
+        //        return false;
+        //    }
+        //}
 
-        public bool UpdateUserInformations(UserInformations userInformations, UserInformations oldUserInformations)
-        {
-            using MySqlCommand mySqlCommand = new MySqlCommand();
+        //public bool UpdateUserInformations(UserInformations userInformations, UserInformations oldUserInformations)
+        //{
+        //    using MySqlCommand mySqlCommand = new MySqlCommand();
 
-            mySqlCommand.Connection = mySqlConnection;
-            mySqlCommand.CommandText = @"UPDATE users SET personal_id = @PersonalID, first_name = @FirstName, last_name = @LastName, password = @Password, permissions = @Permission 
-                                         WHERE personal_id = @OldPersonalID AND first_name = @OldFirstName AND last_name = @OldLastName";
+        //    mySqlCommand.Connection = mySqlConnection;
+        //    mySqlCommand.CommandText = @"UPDATE users SET personal_id = @PersonalID, first_name = @FirstName, last_name = @LastName, password = @Password, permissions = @Permission 
+        //                                 WHERE personal_id = @OldPersonalID AND first_name = @OldFirstName AND last_name = @OldLastName";
 
-            mySqlCommand.Parameters.AddWithValue("@OldPersonalID", oldUserInformations.NameAndID.ID);
-            mySqlCommand.Parameters.AddWithValue("@OldFirstName", oldUserInformations.NameAndID.FirstName);
-            mySqlCommand.Parameters.AddWithValue("@OldLastName", oldUserInformations.NameAndID.LastName);
+        //    mySqlCommand.Parameters.AddWithValue("@OldPersonalID", oldUserInformations.NameAndID.ID);
+        //    mySqlCommand.Parameters.AddWithValue("@OldFirstName", oldUserInformations.NameAndID.FirstName);
+        //    mySqlCommand.Parameters.AddWithValue("@OldLastName", oldUserInformations.NameAndID.LastName);
 
-            mySqlCommand.Parameters.AddWithValue("@PersonalID", userInformations.NameAndID.ID);
-            mySqlCommand.Parameters.AddWithValue("@FirstName", userInformations.NameAndID.FirstName);
-            mySqlCommand.Parameters.AddWithValue("@LastName", userInformations.NameAndID.LastName);
-            mySqlCommand.Parameters.AddWithValue("@Password", userInformations.Password);
-            mySqlCommand.Parameters.AddWithValue("@Permission", PermissionConverter.PermissionsToNumber(userInformations.Permission));
+        //    mySqlCommand.Parameters.AddWithValue("@PersonalID", userInformations.NameAndID.ID);
+        //    mySqlCommand.Parameters.AddWithValue("@FirstName", userInformations.NameAndID.FirstName);
+        //    mySqlCommand.Parameters.AddWithValue("@LastName", userInformations.NameAndID.LastName);
+        //    mySqlCommand.Parameters.AddWithValue("@Password", userInformations.Password);
+        //    mySqlCommand.Parameters.AddWithValue("@Permission", PermissionConverter.PermissionsToNumber(userInformations.Permission));
 
-            try
-            {
-                mySqlCommand.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                CustomMessageBox.ShowPopup("MySQL Error", ex.Message);
-                return false;
-            }
+        //    try
+        //    {
+        //        mySqlCommand.ExecuteNonQuery();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        CustomMessageBox.ShowPopup("MySQL Error", ex.Message);
+        //        return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
         private void CheckStatus(object sender, ElapsedEventArgs e)
         {
